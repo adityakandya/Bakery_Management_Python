@@ -1,6 +1,9 @@
 from django.shortcuts import render
-
+from . import models
 # Create your views here.
 
+
+
 def index(request):
-	return render(request, 'index.html')
+	products = models.Product.get_all_products()
+	return render(request, 'Bakery/index.html', {'products':products})
