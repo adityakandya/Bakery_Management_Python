@@ -1,28 +1,7 @@
 from django.shortcuts import render, redirect
-from . import models
+from Bakery import models
 from django.contrib.auth.hashers import make_password, check_password
 from django.views import View
-
-def order_history(request):
-	return render(request,'Bakery/order_history.html')
-
-def place_order(request):
-	return render(request,'Bakery/place_order.html')
-
-def cart(request):
-	return render(request,'Bakery/cart.html')
-
-
-def index(request):
-	categories = models.Category.get_all_categories()
-	categoryID = request.GET.get('category')
-	if categoryID:
-		products = models.Product.get_all_products_by_categoryid(categoryID)
-	else:
-		products = models.Product.get_all_products()
-	data = {'products':products,'categories':categories}
-	return render(request, 'Bakery/index.html', data)
-
 
 class Signup(View):
 	def get(self, request):
@@ -77,29 +56,4 @@ class Signup(View):
 				'values': value
 			}
 			return render(request, 'Bakery/signup.html', data)
-
-class Login(View):
-	def get(self, request):
-		return render(request, 'Bakery/login.html')
-
-	def post(self, request):
-		email = request.POST.get('email')
-		password = request.POST.get('password')
-		customer = models.Customer.get_by_email(email)
-		if customer:
-			if check_password(password, customer.password):
-				return redirect('Bakery-index')
-			else:
-				error_message = 'Email or Password Invalid'
-		else:
-			error_message = 'Email or Password Invalid'
-		return render(request, 'Bakery/login.html', {'error':error_message})
-
-
-
-
-
-	
-
-
 
