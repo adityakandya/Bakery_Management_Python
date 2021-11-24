@@ -2,6 +2,15 @@ from django.shortcuts import render
 from . import models
 # Create your views here.
 
+def order_history(request):
+	return render(request,'Bakery/order_history.html')
+
+def place_order(request):
+	return render(request,'Bakery/place_order.html')
+
+def cart(request):
+	return render(request,'Bakery/cart.html')
+
 
 def index(request):
 	categories = models.Category.get_all_categories()
