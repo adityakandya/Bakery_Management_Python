@@ -36,3 +36,19 @@ class Customer(models.Model):
     phone = models.CharField(max_length=10,null=True)
     email = models.EmailField()
     password = models.CharField(max_length=500)
+
+    def register(self):
+        self.save()
+
+    def isExists(self):
+        if(Customer.objects.filter(email=self.email)):
+            return True
+        else:
+            return False
+
+    @staticmethod
+    def get_by_email(email):
+        try:
+            return Customer.objects.get(email=email)
+        except:
+            return False
