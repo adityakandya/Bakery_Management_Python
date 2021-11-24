@@ -14,6 +14,8 @@ class Login(View):
 		customer = models.Customer.get_by_email(email)
 		if customer:
 			if check_password(password, customer.password):
+				request.session['customer_id']=customer.id
+				request.session['customer_email']=customer.email
 				return redirect('Bakery-index')
 			else:
 				error_message = 'Email or Password Invalid'
