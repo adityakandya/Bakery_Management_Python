@@ -4,47 +4,61 @@
 
 {% block content %}
 
-  <div class="container">
-     <div class="border rounded p-4 m-4">
-          <p class="display-4 pl-4 ml-4">Edit Profile</p>
+  <div class="container mt-4">
 
-      <hr>
-	<div class="row">
-      <h3>Personal info</h3>
-        <form action="" method="POST">{% csrf_token %}
-          <form class="form-horizontal" role="form">
-            <div class="form-group">
-              <label class="col-lg-6 control-label">First name:</label>
-              <div class="col-lg-8">
-                <input class="form-control" name="first_name" type="text" value="{{customer.first_name}}">
-              </div>
+    <div class="p-4 m-4">
+
+
+        <div class="col-lg-5 rounded mx-auto border pt-4">
+            <div class="text-center col">
+            <h3>Edit Profile</h3>
+            <hr>
             </div>
-            <div class="form-group">
-              <label class="col-lg-6 control-label">Last name:</label>
-              <div class="col-lg-8">
-                <input class="form-control" name="last_name"type="text" value="{{customer.last_name}}">
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="col-lg-6 control-label">Phone:</label>
-              <div class="col-lg-8">
-                <input class="form-control" name="phone" type="text" value="{{customer.phone}}">
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="col-lg-6 control-label">Email:</label>
-              <div class="col-lg-8">
-                <p>{{customer.email}}</p>
-              </div>
-            </div>
-            <div class="form-group">
-                <input class="btn btn-sm btn-info" type="submit" value="Update">
-            </div>
-          </form>
-        </form>
-      </div>
+            <form action="" method="POST">
+
+                {% csrf_token %}
+
+
+                <!-- firstname -->
+                <div class="form-group">
+                    <label for="">First Name</label>
+                    <input type="text" name="firstname"
+                     id="" value="{{values.first_name}}" class="form-control" 
+                     placeholder="">
+                </div>
+
+                <!-- last name -->
+                <div class="form-group">
+                    <label for="">Last Name</label>
+                    <input type="text" name="lastname" 
+                    id="" value="{{values.last_name}}" class="form-control">
+                </div>
+
+                <!-- phone -->
+                <div class="form-group">
+                    <label for="">Phone</label>
+                    <input type="text" name="phone" 
+                    id="" class="form-control"
+                    value="{{values.phone}}"
+                    placeholder="XXXXXXXXXX"
+                    >
+                </div>
+                <!-- email -->
+                <div class="form-group">
+                    <label for="">Email</label>
+                    <input required type="email" name="email" id=""
+                    value="{{values.email}}" 
+                    class=" form-control" placeholder="example@gmail.com">
+                </div>
+
+                <hr>
+                <div class="form-group">
+                    <input class="btn btn-sm btn-info" type="submit" value="Update Profile">
+                </div>
+
+
+            </form>
+        </div>
     </div>
-  </div>
 </div>
-<hr>
 {%endblock%}
