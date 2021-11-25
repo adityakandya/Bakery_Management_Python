@@ -54,6 +54,7 @@ class Customer(models.Model):
     email = models.EmailField()
     password = models.CharField(max_length=500)
     token = models.CharField(max_length=6, null=True)
+    verified = models.BooleanField(default=False)
 
     def register(self):
         self.save()

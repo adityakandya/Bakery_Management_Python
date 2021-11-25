@@ -13,4 +13,7 @@ urlpatterns = [
 	path('profile/', views.profile.as_view(), name='Bakery-profile'),
 	path('password_reset/', pass_reset.PasswordReset.as_view(), name='password_reset'),
 	path('password_reset_check/', pass_reset.PasswordResetCheck.as_view(), name='password_reset_check'),
+	path('verify_user/', pass_reset.VerifyUser.as_view(), name='verify_user'),
+	path('verify_check/', pass_reset.VerifyCheck.as_view(), name='verify_check'),
+
 ]

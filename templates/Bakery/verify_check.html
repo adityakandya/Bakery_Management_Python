@@ -1,0 +1,38 @@
+{% extends "Partials/login_base.html" %}
+
+{%block title%}Enter Code{%endblock%}
+
+{% block content %}
+    <div class="container mt-4">
+
+    <div class="p-4 m-4">
+
+
+        <div class="col-lg-5 rounded mx-auto border pt-4">
+            <form action="" method="POST">
+
+                {% csrf_token %}
+
+                {% if error%}
+                <div class="alert alert-danger" role="alert">
+                    {{error}}
+                </div>
+                {% endif %}
+                <!-- email -->
+                <div class="form-group">
+                    <label for="">Enter Verification Code sent to your mail</label>
+                    <input required type="text" name="token" id=""
+                    class=" form-control" placeholder="------">
+                </div>
+
+                <hr>
+                <div class="form-group">
+                    <input class="btn btn-sm btn-info" type="submit" value="Submit">
+                </div>
+
+
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}

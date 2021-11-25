@@ -1,0 +1,44 @@
+{% extends "Partials/login_base.html" %}
+
+{%block title%}Verify User{%endblock%}
+
+{% block content %}
+    <div class="container mt-4">
+
+    <div class="p-4 m-4">
+
+
+        <div class="col-lg-5 rounded mx-auto border pt-4">
+            <div class="text-center col">
+            <h3>Verification</h3>
+            <hr>
+            </div>
+            <form action="" method="POST">
+
+                {% csrf_token %}
+
+                {% if error%}
+                <div class="alert alert-danger" role="alert">
+                    {{error}}
+                </div>
+                {% endif %}
+                <!-- email -->
+                <div class="form-group">
+                    <label for="">Enter Email</label>
+                    <input required type="email" name="email" id=""
+                    value="{{values.email}}"
+                    class=" form-control" placeholder="example@gmail.com">
+                </div>
+
+
+                <hr>
+                <div class="form-group">
+                    <input class="btn btn-sm btn-info" type="submit" value="Submit">
+                </div>
+
+
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}
