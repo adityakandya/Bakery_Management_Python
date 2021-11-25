@@ -1,0 +1,36 @@
+{%extends 'Partials/base.html'%}
+
+{%block title%}Profile{%endblock%}
+
+{% block content %}
+<div class="container">
+   <div class="border rounded p-4 m-4">
+        <p class="display-4 pl-4 ml-4">Your Profile</p>
+        <hr>
+        <table class="table">
+            <thead>
+            	<thead>
+                    <a class="btn btn-info btn-sm float-right" href="{% url 'Bakery-profile' %}">Edit Profile</a>
+                    <hr>
+                 </thead>
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Phone</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{customer.first_name}}</td>
+                    <td>{{customer.last_name}}</td>
+                    <td>{{customer.phone}}</td>
+                    <td>{{customer.email}}</td>
+                </tr>
+
+            </tbody>
+        </table>
+        
+   </div>
+</div>
+{% endblock %}

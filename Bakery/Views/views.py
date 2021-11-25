@@ -1,13 +1,24 @@
 from django.shortcuts import render, redirect
 from Bakery import models
 from django.views import View
-from Bakery.models import Product
+from Bakery.models import Product, Order, Customer
 
-def order_history(request):
-	return render(request,'Bakery/order_history.html')
+class order_history(View):
+	def get(self, request):
+		customer=request.session.get('customer_email')
+		print(customer)
+		orders=Order.get_orders_by_customer(customer)
+		print(orders,'bcde')
+		return render(request,'Bakery/order_history.html',{'orders': orders})
 
 def place_order(request):
 	return render(request,'Bakery/place_order.html')
+
+class profile(View):
+	def get(self,request):
+		customeremail=request.session.get('customer_email')
+		customer=Customer.get_by_email(customeremail)
+		return render(request, 'Bakery/profile.html', {'customer':customer})
 
 def logout(request):
 	request.session.clear()
