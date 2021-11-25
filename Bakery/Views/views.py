@@ -20,6 +20,20 @@ class profile(View):
 		customer=Customer.get_by_email(customeremail)
 		return render(request, 'Bakery/profile.html', {'customer':customer})
 
+class editprofile(View):
+	def get(self,request):
+		customeremail=request.session.get('customer_email')
+		customer=Customer.get_by_email(customeremail)
+		fields = ['first_name','last_name','phone']
+		return render(request, 'Bakery/edit_profile.html',{'customer':customer})
+	def post(self,request):
+		first_name = request.POST.get('first_name')
+		last_name = request.POST.get('last_name')
+		phone = request.POST.get('phone')
+		customeremail=request.session.get('customer_email')
+		models.Customer.objects.filter(email=customeremail).update(first_name=first_name,last_name=last_name,phone=phone)
+		return redirect('Bakery-profile')
+
 def logout(request):
 	request.session.clear()
 	return redirect('Bakery-login')

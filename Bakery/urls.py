@@ -11,6 +11,7 @@ urlpatterns = [
 	path('logout/', views.logout, name='Bakery-logout'),
 	path('check-out/', checkout.Checkout.as_view(), name='Bakery-checkout'),
 	path('profile/', views.profile.as_view(), name='Bakery-profile'),
+	path('editprofile/', views.editprofile.as_view(), name='Bakery-editprofile'),
 	path('password_reset/', pass_reset.PasswordReset.as_view(), name='password_reset'),
 	path('password_reset_check/', pass_reset.PasswordResetCheck.as_view(), name='password_reset_check'),
 	path('verify_user/', pass_reset.VerifyUser.as_view(), name='verify_user'),
