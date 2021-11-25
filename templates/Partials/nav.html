@@ -29,6 +29,18 @@
                         <a class="nav-link text-white" href="/logout">Logout</a>
                     </li>
                 </ul>
+                {%else%}
+                <ul class="navbar-nav ml-auto">
+                      <li class="nav-item active">
+                        <a class="nav-link text-white" href="/signup">Signup<span
+                                class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link text-white" href="/login">Login<span
+                                class="sr-only">(current)</span></a>
+                    </li>
+
+                </ul>
                 {%endif%}
             </div>
         </div>
