@@ -6,9 +6,7 @@ from Bakery.models import Product, Order, Customer
 class order_history(View):
 	def get(self, request):
 		customer=request.session.get('customer_email')
-		print(customer)
 		orders=Order.get_orders_by_customer(customer)
-		print(orders,'bcde')
 		return render(request,'Bakery/order_history.html',{'orders': orders})
 
 def place_order(request):

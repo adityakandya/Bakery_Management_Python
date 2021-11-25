@@ -44,6 +44,7 @@ class Customer(models.Model):
     phone = models.CharField(max_length=10,null=True)
     email = models.EmailField()
     password = models.CharField(max_length=500)
+    token = models.CharField(max_length=6, null=True)
 
     def register(self):
         self.save()
@@ -58,6 +59,13 @@ class Customer(models.Model):
     def get_by_email(email):
         try:
             return Customer.objects.get(email=email)
+        except:
+            return False
+
+    @staticmethod
+    def get_by_token(token):
+        try:
+            return Customer.objects.get(token=token)
         except:
             return False
 

@@ -23,6 +23,12 @@
                 </div>
                 {% endif %}
 
+                {% if msg%}
+                <div class="alert alert-info" role="alert">
+                    {{msg}}
+                </div>
+                {% endif %}
+
                 <!-- email -->
                 <div class="form-group">
                     <label for="">Email</label>
@@ -43,6 +49,7 @@
                 <hr>
                 <div class="form-group">
                     <input class="btn btn-sm btn-info" type="submit" value="Login">
+                    <a class="mx-auto" href="{%url 'password_reset'%}">Forget Password!</a>
                 </div>
 
 
