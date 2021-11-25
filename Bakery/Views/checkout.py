@@ -7,11 +7,13 @@ class Checkout(View):
         address = request.POST.get('address')
         phone = request.POST.get('phone')
         customer = request.session.get('customer_id')
+        email = request.session.get('customer_email')
         cart = request.session.get('cart')
         products = models.Product.get_products_by_id(list(cart.keys()))
 
         for product in products:
             order = models.Order(customer=models.Customer(id=customer),
+                          email=email,
                           product=product,
                           price=product.price,
                           address=address,

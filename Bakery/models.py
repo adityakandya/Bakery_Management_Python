@@ -83,7 +83,7 @@ class Order(models.Model):
     customer = models.ForeignKey(Customer,on_delete=models.CASCADE,null=True)
     quantity = models.IntegerField(default=1)
     price = models.IntegerField()
-    email = models.EmailField(default='sandramaryjacob27@gmail.com')
+    email = models.EmailField()
     address = models.CharField(max_length=50,default='',blank=True)
     phone = models.CharField(max_length=15,default='',blank=True)
     date = models.DateField(default=datetime.datetime.today)
