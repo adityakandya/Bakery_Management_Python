@@ -11,7 +11,10 @@ class Login(View):
 	def post(self, request):
 		email = request.POST.get('email')
 		password = request.POST.get('password')
+		print(email,password)
+
 		customer = models.Customer.get_by_email(email)
+		print(customer)
 		if customer:
 			if check_password(password, customer.password):
 				request.session['customer_id']=customer.id

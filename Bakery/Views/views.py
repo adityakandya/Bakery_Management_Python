@@ -9,8 +9,6 @@ def order_history(request):
 def place_order(request):
 	return render(request,'Bakery/place_order.html')
 
-
-
 class Index(View):
 	def post(self,request):
 

@@ -1,5 +1,5 @@
 from django.urls import path
-from Bakery.Views import views, login, signup, cart
+from Bakery.Views import views, login, signup, cart,checkout
 
 urlpatterns = [
 	path('', views.Index.as_view(), name='Bakery-index'),
@@ -8,5 +8,6 @@ urlpatterns = [
 	path('cart/', cart.Cart.as_view(), name='Bakery-cart'),
 	path('signup/', signup.Signup.as_view(), name='Bakery-signup'),
 	path('login/', login.Login.as_view(), name='Bakery-login'),
+	path('check-out/', checkout.Checkout.as_view(), name='Bakery-checkout'),
 
 ]
