@@ -1,4 +1,5 @@
 from django.db import models
+import datetime
 
 
 class Category(models.Model):
@@ -21,6 +22,9 @@ class Product(models.Model):
         return f'{self.name}'
 
     @staticmethod
+    def get_products_by_id(ids):
+        return Product.objects.filter(id__in=ids)
+    @staticmethod
     def get_all_products():
     	return Product.objects.all()
 
@@ -30,6 +34,10 @@ class Product(models.Model):
     	       return Product.objects.filter(category = category_id)
         else:
             return Product.get_all_products()
+    @staticmethod
+    def get_quantity_by_productid(product_id):
+        return Product.objects.get(id=product_id).quantity
+
 class Customer(models.Model):
     first_name = models.CharField(max_length=50,null=True)
     last_name = models.CharField(max_length=50,null=True)
@@ -52,3 +60,12 @@ class Customer(models.Model):
             return Customer.objects.get(email=email)
         except:
             return False
+
+class Order(models.Model):
+    product = models.ForeignKey(Product,on_delete=models.CASCADE)
+    customer = models.ForeignKey(Customer,on_delete=models.CASCADE)
+    quantity = models.IntegerField(default=1)
+    price = models.IntegerField()
+    address = models.CharField(max_length=50,default='',blank=True)
+    phone = models.CharField(max_length=15,default='',blank=True)
+    date = models.DateField(default=datetime.datetime.today)
