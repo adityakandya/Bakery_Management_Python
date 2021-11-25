@@ -1,5 +1,5 @@
 from django.urls import path
-from Bakery.Views import views, login, signup, cart,checkout, pass_reset, editprofile
+from Bakery.Views import views, login, signup, cart,checkout, pass_reset, editprofile, changepassword
 
 urlpatterns = [
 	path('', views.Index.as_view(), name='Bakery-index'),
@@ -16,6 +16,7 @@ urlpatterns = [
 	path('password_reset_check/', pass_reset.PasswordResetCheck.as_view(), name='password_reset_check'),
 	path('verify_user/', pass_reset.VerifyUser.as_view(), name='verify_user'),
 	path('verify_check/', pass_reset.VerifyCheck.as_view(), name='verify_check'),
-	path('edit_profile/', editprofile.EditProfile.as_view(), name = 'Bakery-editprofile')
+	path('edit_profile/', editprofile.EditProfile.as_view(), name = 'Bakery-editprofile'),
+	path('change_password/', changepassword.ChangePassword.as_view(), name = 'Bakery-changepassword'),
 
 ]

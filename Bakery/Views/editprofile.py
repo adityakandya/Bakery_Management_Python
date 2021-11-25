@@ -1,12 +1,10 @@
 from django.shortcuts import render, redirect
 from Bakery import models
-from django.contrib.auth.hashers import make_password, check_password
 from django.views import View
 
 class EditProfile(View):
 	def get(self, request):
 		email = request.session.get('customer_email')
-		print(email)
 		customer = models.Customer.get_by_email(email)
 		first_name = customer.first_name
 		last_name = customer.last_name
