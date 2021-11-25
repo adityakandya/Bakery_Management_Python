@@ -4,17 +4,17 @@
 
 {%block content%}
 <div class="container mt-4">
-    
+
     <div class="p-4 m-4">
 
-        
+
         <div class="col-lg-5 rounded mx-auto border pt-4">
             <div class="text-center col">
             <h3>Login</h3>
             <hr>
             </div>
             <form action="" method="POST">
-                
+
                 {% csrf_token %}
 
                 {% if error%}
@@ -27,15 +27,15 @@
                 <div class="form-group">
                     <label for="">Email</label>
                     <input required type="email" name="email" id=""
-                    value="{{values.email}}" 
+                    value="{{values.email}}"
                     class=" form-control" placeholder="example@gmail.com">
                 </div>
 
                 <!-- password -->
                 <div class="form-group">
                     <label for="">Password</label>
-                    <input type="password" 
-                    name="password" 
+                    <input type="password"
+                    name="password"
                     id=""
                      class="form-control" placeholder="********">
                 </div>
@@ -45,7 +45,7 @@
                     <input class="btn btn-sm btn-info" type="submit" value="Login">
                 </div>
 
-                
+
             </form>
         </div>
     </div>

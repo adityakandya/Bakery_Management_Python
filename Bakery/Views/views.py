@@ -9,6 +9,10 @@ def order_history(request):
 def place_order(request):
 	return render(request,'Bakery/place_order.html')
 
+def logout(request):
+	request.session.clear()
+	return redirect('Bakery-login')
+
 class Index(View):
 	def post(self,request):
 
