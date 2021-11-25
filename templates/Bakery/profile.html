@@ -9,7 +9,7 @@
         <hr>
         <table class="table">
             <thead>
-            	<thead>
+                <thead>
                     <a class="btn btn-info btn-sm float-right" href="{% url 'Bakery-profile' %}">Edit Profile</a>
                     <hr>
                  </thead>
@@ -18,14 +18,25 @@
                     <th>Last Name</th>
                     <th>Phone</th>
                     <th>Email</th>
+                    <th>Account Status</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
+                    
+                    {% if customer.verified %}
                     <td>{{customer.first_name}}</td>
                     <td>{{customer.last_name}}</td>
                     <td>{{customer.phone}}</td>
                     <td>{{customer.email}}</td>
+                    <td color:green;>Verified</td>
+                    {%else%}
+                    <td>{{customer.first_name}}</td>
+                    <td>{{customer.last_name}}</td>
+                    <td>{{customer.phone}}</td>
+                    <td>{{customer.email}}</td>
+                    <td>Not Verified <a class="btn btn-info btn-sm float-right" href="/verify_user">Verify your account</a></td>
+                    {%endif%}
                 </tr>
 
             </tbody>
