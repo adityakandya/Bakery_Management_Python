@@ -2,6 +2,15 @@ from django.db import models
 import datetime
 
 
+class Available_hrs(models.Model):
+    Opening_time = models.TimeField(null=True)
+    Closing_time = models.TimeField(null=True)
+
+    @staticmethod
+    def get_all():
+        return Available_hrs.objects.all()
+
+
 class Category(models.Model):
     name = models.CharField(max_length=100)
     def __str__(self):
