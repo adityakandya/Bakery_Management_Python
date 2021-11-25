@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from Bakery import models
 from django.views import View
-
+from django.db.models import F
 class Checkout(View):
     def post(self, request):
         address = request.POST.get('address')
@@ -19,6 +19,7 @@ class Checkout(View):
                           address=address,
                           phone=phone,
                           quantity=cart.get(str(product.id)))
+            models.Product.objects.filter(name=product).update(quantity=F('quantity')-int(cart.get(str(product.id))))
             order.save()
             
         request.session['cart'] = {}
