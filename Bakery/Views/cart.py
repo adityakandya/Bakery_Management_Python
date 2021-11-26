@@ -7,7 +7,10 @@ class Cart(View):
     def get(self, request):
         ids = list(request.session.get('cart').keys())
         products = models.Product.get_products_by_id(ids)
-        return render(request, 'Bakery/cart.html',{'products':products})
+        email = request.session.get('customer_email')
+        customer = models.Customer.get_by_email(email)
+        verified=customer.verified
+        return render(request, 'Bakery/cart.html',{'products':products, 'verified':verified})
 
     def post(self,request):
         product = request.POST.get('product')

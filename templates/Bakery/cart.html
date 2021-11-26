@@ -67,9 +67,16 @@ CART PAGE
         </table>
         <hr>
         {% if request.session.customer_id %}
-        <div class="m-3 p-3">
-            <a href="#" data-toggle="modal" data-target="#exampleModal" class="btn btn-outline-info border rounded  col-lg-3 float-right">Check out</a>
-        </div>
+            {% if verified %}
+            <div class="m-3 p-3">
+                <a href="#" data-toggle="modal" data-target="#exampleModal" class="btn btn-outline-info border rounded  col-lg-3 float-right">Check out</a>
+            </div>
+            {%else%}
+            <div class="m-3 p-3">
+                <a href="{%url 'verify_user'%}" class="btn border btn-outline-info rounded  col-lg-3 float-right">Verify to Check out</a>
+            </div>
+             {%endif%}
+
         {%else%}
         <div class="m-3 p-3">
             <a href="/login" class="btn btn-outline-info border rounded  col-lg-3 float-right">Login to Check out</a>
