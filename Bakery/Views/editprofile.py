@@ -14,7 +14,8 @@ class EditProfile(View):
 	            'first_name': first_name,
 	            'last_name': last_name,
 	            'phone': phone,
-	            'email': email
+	            'email': email,
+	            'verified':customer.verified
 	        }
 		return render(request, 'Bakery/edit_profile.html', {'values':value})
 

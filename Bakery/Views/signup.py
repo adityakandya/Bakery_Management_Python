@@ -2,8 +2,17 @@ from django.shortcuts import render, redirect
 from Bakery import models
 from django.contrib.auth.hashers import make_password, check_password
 from django.views import View
+import re
+
+def validate_password(pwd):
+	reg = "^(?=.*[A-Z])(?=.*\d)(?=.*[#$&%@])[A-Za-z\d#$&%@]{8,16}$"
+	if re.search(reg, pwd):
+		return True
+	else:
+		return False
 
 class Signup(View):
+
 	def get(self, request):
 		return render(request, 'Bakery/signup.html')
 
@@ -40,8 +49,8 @@ class Signup(View):
 			error_message = 'Phone Number required'
 		elif len(customer.phone) < 10:
 			error_message = 'Phone Number must be 10 char Long'
-		elif len(customer.password) < 6:
-			error_message = 'Password must be 6 char long'
+		elif not validate_password(password):
+			error_message = 'Password must be between 8 to 16 char long, should contain 1 Capital letter, 1 Digit and 1 special character.'
 		elif password!=conf_password:
 			error_message = 'New Password and confirm password not same!'
 		elif len(customer.email) < 5:

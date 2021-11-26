@@ -5,7 +5,15 @@ from django.core.mail import send_mail
 from Bakery import models
 import random
 from django.contrib.auth.hashers import make_password
+import re
 
+
+def validate_password(pwd):
+	reg = "^(?=.*[A-Z])(?=.*\d)(?=.*[#$&%@])[A-Za-z\d#$&%@]{8,16}$"
+	if re.search(reg, pwd):
+		return True
+	else:
+		return False
 
 def gen_token():
 	 a = [str(int(random.random()*10)) for i in range(6)]
@@ -47,11 +55,14 @@ class PasswordResetCheck(View):
 		new_password2 = request.POST.get('newpassword2')
 
 		
-		if customer and new_password==new_password2:
+		if customer and new_password==new_password2 and validate_password(new_password):
 			customer.token = ''
 			customer.password = make_password(new_password)
 			customer.save()
 			return redirect('Bakery-login')
+
+		elif not validate_password(new_password):
+			return render(request, 'Bakery/password_reset_check.html', {'error':'Password must be between 8 to 16 char long, should contain 1 Capital letter, 1 Digit and 1 special character.'})
 
 		elif new_password!=new_password2:
 			return render(request, 'Bakery/password_reset_check.html', {'error':'New Password and confirm password not same!'})

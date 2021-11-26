@@ -46,9 +46,15 @@
                 <!-- email -->
                 <div class="form-group">
                     <label for="">Email</label>
+                    {%if not values.verified%}
                     <input required type="email" name="email" id=""
                     value="{{values.email}}" 
                     class=" form-control" placeholder="example@gmail.com">
+                    {%else%}
+                    <div class="mx-auto border rounded p-2">
+                        {{values.email}}
+                    </div>
+                    {%endif%}
                 </div>
 
                 <hr>

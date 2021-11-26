@@ -1,4 +1,4 @@
-{%extends 'Partials/login_base.html'%}
+{%extends 'Partials/base.html'%}
 
 {%block title%}Sign Up{%endblock%}
 
@@ -25,7 +25,7 @@
                 <!-- firstname -->
                 <div class="form-group">
                     <label for="">First Name</label>
-                    <input type="text" name="firstname"
+                    <input required type="text" name="firstname"
                      id="" value="{{values.first_name}}" class="form-control" 
                      placeholder="">
                 </div>
@@ -33,14 +33,14 @@
                 <!-- last name -->
                 <div class="form-group">
                     <label for="">Last Name</label>
-                    <input type="text" name="lastname" 
+                    <input required type="text" name="lastname" 
                     id="" value="{{values.last_name}}" class="form-control">
                 </div>
 
                 <!-- phone -->
                 <div class="form-group">
                     <label for="">Phone</label>
-                    <input type="text" name="phone" 
+                    <input required type="text" name="phone" 
                     id="" class="form-control"
                     value="{{values.phone}}"
                     placeholder="XXXXXXXXXX"
@@ -58,7 +58,7 @@
                 <!-- password -->
                 <div class="form-group">
                     <label for="">Password</label>
-                    <input type="password" 
+                    <input required type="password" 
                     name="password" 
                     id=""
                      class="form-control" placeholder="********">
@@ -66,7 +66,7 @@
 
                 <div class="form-group">
                     <label for="">Confirm Password</label>
-                    <input type="password" 
+                    <input required type="password" 
                     name="confpassword" 
                     id=""
                      class="form-control" placeholder="********">
