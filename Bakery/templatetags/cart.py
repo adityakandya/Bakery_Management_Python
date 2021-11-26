@@ -1,4 +1,5 @@
 from django import template
+from Bakery import models
 
 register = template.Library()
 
@@ -32,4 +33,10 @@ def total_cart_price(products , cart):
         sum += price_total(p , cart)
 
     return sum
-    
+
+@register.filter(name='get_limit')
+def get_limit(product):
+    if models.Product.get_quantity_by_productid(product.id) == 0:
+        return True
+    else:
+        return False

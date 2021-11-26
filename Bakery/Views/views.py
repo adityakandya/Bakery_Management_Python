@@ -39,40 +39,65 @@ def logout(request):
 	return redirect('Bakery-login')
 
 class Index(View):
-	def post(self,request):
 
+	def post(self,request):
 		product = request.POST.get('product')
 		limit = Product.get_quantity_by_productid(product)
 		remove = request.POST.get('remove')
 		cart = request.session.get('cart')
-		if cart:
-			quantity = cart.get(product)
-			if quantity:
-				if remove:
-					if quantity<=1:
-						cart.pop(product)
-					else:
-						cart[product] = quantity - 1
-				elif quantity>=int(limit):
-					cart[product] = limit
-				else:
-					cart[product] = quantity + 1
-			else:
-				cart[product] = 1
-
+		print("limit is ", limit)
+		categories = models.Category.get_all_categories()
+		categoryID = request.GET.get('category')
+		if categoryID:
+			products = models.Product.get_all_products_by_categoryid(categoryID)
 		else:
-			cart = {}
-			cart[product] = 1
-		request.session['cart'] = cart
+			products = models.Product.get_all_products()
 
-		return redirect('Bakery-index')
+
+		if cart:
+			if limit == 0:
+
+
+				data = {'products':products,'categories':categories}
+				# return redirect('Bakery-index')
+				return render(request,'Bakery/index.html',data)
+			else:
+
+				quantity = cart.get(product)
+				if quantity:
+					if remove:
+						if quantity<=1:
+							cart.pop(product)
+						else:
+							cart[product] = quantity - 1
+					elif quantity>=int(limit):
+						cart[product] = limit
+					else:
+						cart[product] = quantity + 1
+				else:
+					cart[product] = 1
+				request.session['cart'] = cart
+				return redirect('Bakery-index')
+		else:
+
+			cart = {}
+			if limit != 0 :
+				cart[product] = 1
+				request.session['cart'] = cart
+				return redirect('Bakery-index')
+			else:
+
+				data = {'products':products,'categories':categories}
+				return render(request,'Bakery/index.html',data)
+
+
+
 	def get(self,request):
 		cart = request.session.get('cart')
 		if not cart:
 			request.session['cart'] = {}
 
 		products = None
-
 		categories = models.Category.get_all_categories()
 		categoryID = request.GET.get('category')
 		if categoryID:

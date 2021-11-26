@@ -23,6 +23,8 @@ class EditProfile(View):
 		first_name = request.POST.get('firstname')
 		last_name = request.POST.get('lastname')
 		email = request.POST.get('email')
+		if not email:
+			email = request.session.get('customer_email')
 		phone = request.POST.get('phone')
 
 		customer = models.Customer.get_by_email(email)
@@ -34,5 +36,3 @@ class EditProfile(View):
 		customer.save()
 
 		return redirect('Bakery-profile')
-
-

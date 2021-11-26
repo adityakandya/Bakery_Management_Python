@@ -9,7 +9,7 @@ INDEX PAGE
 <div class="container-fluid">
 	<div>
 			<!--filter -->
-			
+
 			<div class="dropdown mt-3 ml-2">
 			  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
 			    Filters
@@ -19,7 +19,7 @@ INDEX PAGE
 			  	{%for category in categories%}
 				  <a href="/?category={{category.id}}" class="dropdown-item">{{category.name}}</a>
 				  {%endfor%}
-			    
+
 			  </div>
 			</div>
 
@@ -58,13 +58,21 @@ INDEX PAGE
 								<input type="submit" value=" + " class="btn btn-block btn-light border-left">
 							</form>
 						</div>
-						{% else %}
-						<form action="/#{{product.id}}" method="POST" class="btn-block">
-							{% csrf_token %}
+						{%else%}
+							{%if product|get_limit %}
+							<form action="/#{{product.id}}" method="POST" class="btn-block">{% csrf_token %}
+							<input hidden type="text" name='product' value='{{product.id}}'>
+							<button class="float-right btn btn-light  form-control">
+								Item disabled</button>
+								</form>
+							{%else%}
+							<form action="/#{{product.id}}" method="POST" class="btn-block">{% csrf_token %}
 							<input hidden type="text" name='product' value='{{product.id}}'>
 							<input type="submit" class="float-right btn btn-light  form-control"
 								value="Add To Cart">
-						</form>
+							</form>
+							{%endif%}
+
 						{% endif %}
 
 						</div>
@@ -74,5 +82,7 @@ INDEX PAGE
 			</div>
 	</div>
 </div>
+
+
 
 {%endblock%}

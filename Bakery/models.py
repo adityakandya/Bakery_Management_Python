@@ -94,4 +94,4 @@ class Order(models.Model):
 
     @staticmethod
     def get_orders_by_customer(customer_email):
-        return Order.objects.filter(email=customer_email)
+        return reversed(Order.objects.filter(email=customer_email))
