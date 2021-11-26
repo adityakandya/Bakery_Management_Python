@@ -20,11 +20,10 @@ class PasswordReset(View):
 		email = request.POST.get('email')
 		token = gen_token()
 		customer = models.Customer.get_by_email(email)
-		customer.token=token
-		customer.save()
-		print('Customer token added in DB', customer.token, 'for', customer.email)
 		if customer:
-			customer.token = token
+			customer.token=token
+			customer.save()
+			print('Customer token added in DB', customer.token, 'for', customer.email)
 			send_mail(
 		    'Password Reset',
 		    f'Enter this token to reset your password - {token}',
