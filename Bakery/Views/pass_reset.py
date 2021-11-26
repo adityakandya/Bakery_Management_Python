@@ -50,7 +50,7 @@ class PasswordResetCheck(View):
 		
 		if customer and new_password==new_password2:
 			customer.token = ''
-			customer.password = make_password()
+			customer.password = make_password(new_password)
 			customer.save()
 			return redirect('Bakery-login')
 
