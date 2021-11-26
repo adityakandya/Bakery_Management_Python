@@ -14,6 +14,7 @@ class Signup(View):
 		phone = postData.get('phone')
 		email= postData.get('email')
 		password = postData.get('password')
+		conf_password = postData.get('confpassword')
 
 		value = {
 	            'first_name': first_name,
@@ -41,10 +42,13 @@ class Signup(View):
 			error_message = 'Phone Number must be 10 char Long'
 		elif len(customer.password) < 6:
 			error_message = 'Password must be 6 char long'
+		elif password!=conf_password:
+			error_message = 'New Password and confirm password not same!'
 		elif len(customer.email) < 5:
 			error_message = 'Email must be 5 char long'
 		elif customer.isExists():
 			error_message = 'Email Address Already Registered..'
+
 
 		if not error_message:
 			customer.password = make_password(customer.password)

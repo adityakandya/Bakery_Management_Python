@@ -44,13 +44,19 @@ class PasswordResetCheck(View):
 	def post(self, request):
 		token = request.POST.get('token')
 		customer = models.Customer.get_by_token(token)
+		new_password = request.POST.get('password')
+		new_password2 = request.POST.get('newpassword2')
 
 		
-		if customer:
+		if customer and new_password==new_password2:
 			customer.token = ''
-			customer.password = make_password(request.POST.get('password'))
+			customer.password = make_password()
 			customer.save()
 			return redirect('Bakery-login')
+
+		elif new_password!=new_password2:
+			return render(request, 'Bakery/password_reset_check.html', {'error':'New Password and confirm password not same!'})
+
 		else:
 			return render(request, 'Bakery/password_reset_check.html', {'error':'Token Wrong'})
 
